@@ -28,8 +28,10 @@ def create_db():
             with connection.cursor() as cursor:
                 cursor.execute(f'DROP DATABASE {DB_NAME}')
                 cursor.execute(f'CREATE DATABASE {DB_NAME}')
+
     except (Exception, psycopg2.DatabaseError) as error:
         return f'[INFO] {error}'
+
     finally:
         connection.close()
 
