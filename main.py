@@ -15,7 +15,7 @@ if __name__ == '__main__':
                  15478  # VK
                  ]
 
-    database_name = 'cw'
+    database_name = 'имя базы данных'
     params = config()
 
     create_db(database_name, params)
