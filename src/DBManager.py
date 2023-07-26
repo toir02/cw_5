@@ -59,3 +59,38 @@ class DBManager:
 
         connection.close()
         return data
+
+    def get_vacancies_wth_highest_salary(self):
+        try:
+            connection = psycopg2.connect(database=self.database_name, **self.params)
+            with connection.cursor() as cursor:
+                cursor.execute('SELECT * '
+                               'FROM vacancies '
+                               'WHERE salary > (SELECT AVG(salary) FROM vacancies);')
+
+                data = cursor.fetchall()
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            return f'[INFO] {error}'
+
+        connection.close()
+        return data
+
+    def get_vacancies_with_keyword(self, keyword):
+        try:
+            connection = psycopg2.connect(database=self.database_name, **self.params)
+            with connection.cursor() as cursor:
+                cursor.execute(f"""
+                SELECT * 
+                FROM vacancies
+                WHERE lower(title_vacancy) LIKE '%{keyword}%'
+                OR lower(title_vacancy) LIKE '%{keyword}'
+                OR lower(title_vacancy) LIKE '{keyword}%'""")
+
+                data = cursor.fetchall()
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            return f'[INFO] {error}'
+
+        connection.close()
+        return data
