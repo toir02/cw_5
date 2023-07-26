@@ -32,7 +32,7 @@ def filter_strings(string: str) -> str:
                '<b>', '</b>', '<ul>', '<li>', '</li>', '<br />', '</ul>']
 
     for symbol in symbols:
-        string = string.replace(symbol, ' ')
+        string = string.replace(symbol, '')
 
     return string
 
