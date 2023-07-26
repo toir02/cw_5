@@ -63,7 +63,7 @@ def create_tables(database_name, params):
     connection = psycopg2.connect(database=database_name, **params)
 
     with connection.cursor() as cursor:
-        cursor.execute('CREATE TABLE employees('
+        cursor.execute('CREATE TABLE companies('
                        'company_id serial PRIMARY KEY,'
                        'company_name varchar(50) NOT NULL,'
                        'description text,'
@@ -72,7 +72,7 @@ def create_tables(database_name, params):
 
         cursor.execute('CREATE TABLE vacancies('
                        'vacancy_id serial PRIMARY KEY,'
-                       'company_id int REFERENCES employees (company_id) NOT NULL,'
+                       'company_id int REFERENCES companies (company_id) NOT NULL,'
                        'title_vacancy varchar(150) NOT NULL,'
                        'salary int,'
                        'link varchar(200) NOT NULL,'
@@ -88,7 +88,7 @@ def fill_db(employers: list[dict], database_name, params):
 
     with connection.cursor() as cursor:
         for employer in employers:
-            cursor.execute('INSERT INTO employees (company_name, description, link, url_vacancies)'
+            cursor.execute('INSERT INTO companies (company_name, description, link, url_vacancies)'
                            'VALUES (%s, %s, %s, %s)'
                            'returning company_id',
                            (employer["company"].get("name"),
