@@ -2,7 +2,7 @@ import requests
 import psycopg2
 
 
-def get_employers(companies):
+def get_employers(companies: list) -> list:
     """
     В качестве аргумента принимает список с id компаниями
     Возвращает список словарей формата
@@ -48,7 +48,11 @@ def filter_salary(salary):
     return None
 
 
-def create_db(database_name, params):
+def create_db(database_name: str, params: dict) -> None:
+    """
+    Функция для создания базы данных
+    Принимает в качестве аргументов имя базы данных и параметры для подключения
+    """
     connection = psycopg2.connect(database='postgres', **params)
     connection.autocommit = True
 
@@ -59,7 +63,11 @@ def create_db(database_name, params):
     connection.close()
 
 
-def create_tables(database_name, params):
+def create_tables(database_name: str, params: dict) -> None:
+    """
+    Функция для создания таблиц в базе данных
+    Принимает в качестве аргументов имя базы данных и параметры для подключения
+    """
     connection = psycopg2.connect(database=database_name, **params)
 
     with connection.cursor() as cursor:
@@ -83,7 +91,11 @@ def create_tables(database_name, params):
     connection.close()
 
 
-def fill_db(employers: list[dict], database_name, params):
+def fill_db(employers: list[dict], database_name: str, params: dict) -> None:
+    """
+    Функция для заполнения таблиц данными
+    Принимает в качестве аргументов список словарей, имя базы данных и параметры для подключения
+    """
     connection = psycopg2.connect(database=database_name, **params)
 
     with connection.cursor() as cursor:
