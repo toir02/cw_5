@@ -7,7 +7,11 @@ class DBManager:
         self.database_name = database_name
         self.params = params
 
-    def get_companies_and_vacancies_count(self):
+    def get_companies_and_vacancies_count(self) -> list[tuple] or str:
+        """
+        Метод для получения компаний и количества вакансий у компании.
+        Возвращает список кортежей или информирование об ошибки
+        """
 
         try:
             connection = psycopg2.connect(database=self.database_name, **self.params)
@@ -25,7 +29,11 @@ class DBManager:
         connection.close()
         return data
 
-    def get_all_vacancies(self):
+    def get_all_vacancies(self) -> list[tuple] or str:
+        """
+        Метод для получения вакансий.
+        Возвращает список кортежей или информирование об ошибки
+        """
 
         try:
             connection = psycopg2.connect(database=self.database_name, **self.params)
@@ -42,7 +50,11 @@ class DBManager:
         connection.close()
         return data
 
-    def get_avg_salary(self):
+    def get_avg_salary(self) -> list[tuple] or str:
+        """
+        Метод для получения компании и среднего значения зарплат всех вакансий у компании.
+        Возвращает список кортежей или информирование об ошибки
+        """
 
         try:
             connection = psycopg2.connect(database=self.database_name, **self.params)
@@ -60,7 +72,12 @@ class DBManager:
         connection.close()
         return data
 
-    def get_vacancies_wth_highest_salary(self):
+    def get_vacancies_wth_highest_salary(self) -> list[tuple] or str:
+        """
+        Метод для получения вакансий, зарплата у которых выше среднего значения.
+        Возвращает список кортежей или информирование об ошибки
+        """
+
         try:
             connection = psycopg2.connect(database=self.database_name, **self.params)
             with connection.cursor() as cursor:
@@ -76,7 +93,13 @@ class DBManager:
         connection.close()
         return data
 
-    def get_vacancies_with_keyword(self, keyword):
+    def get_vacancies_with_keyword(self, keyword: str) -> list[tuple] or str:
+        """
+        Метод для получения вакансий, где ключевое слово, вводимое пользователем есть в названии вакансии.
+        Принимает строку(ключевое слово).
+        Возвращает список кортежей или информирование об ошибки
+        """
+
         try:
             connection = psycopg2.connect(database=self.database_name, **self.params)
             with connection.cursor() as cursor:
