@@ -7,7 +7,7 @@ ____
 
 ## База данных
 
-### ERD диаграмма для базы данных
+### ER-диаграмма для базы данных
 
 <a href="https://ibb.co/ykpKRYc"><img src="https://i.ibb.co/rp3qtcR/image.png" alt="image" border="0" /></a>
 
